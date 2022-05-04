@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import stockData from "../stock-data";
 
 export default function Stocks(props) {
-
     return (
         <main>
             <h1>Most Active Stocks</h1>
@@ -11,7 +10,7 @@ export default function Stocks(props) {
                     stockData.map((stock, idx) => {
                         const { name, symbol } = stock;
                         return (
-                            <Link to={`/stocks/${symbol}`}>{name}, {symbol}</Link>
+                            <Link className="stock-links" to={`/stocks/${symbol}`}>{name}, {symbol}</Link>
                         )
                     })
                 }

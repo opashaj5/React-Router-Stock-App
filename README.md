@@ -1,1 +1,1 @@
-# [Netlify Live Link](https://react-stock-app.netlify.app/)
+# [Netlify Live Link]()

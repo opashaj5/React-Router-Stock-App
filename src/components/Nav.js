@@ -1,9 +1,13 @@
+import { Link } from "react-router-dom";
+
 export default function Nav() {
     return (
-        <nav>
-            <a class="nav-link" href="/">Home</a>
-            <a class="nav-link" href="/about">About</a>
-            <a class="nav-link" href="/stocks">Stocks</a>
-        </nav>
+        <div className="nav">
+            <nav aria-label="Main Navigation" role="navigation">
+                <Link to="/">Home</Link>
+                <Link to="/about">About</Link>
+                <Link to="/stocks">Stocks</Link>
+            </nav>
+        </div>
     )
 };

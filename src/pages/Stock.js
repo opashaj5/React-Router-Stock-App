@@ -1,6 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router';
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export default function Stock(props) {
     const apiKey = "0d8549135377a48644c3e54129de948d"
@@ -40,7 +41,7 @@ export default function Stock(props) {
                     <h5>Volume:
                         <li>{stock.volume}</li></h5>
                 </div>
-                <a class="nav-link" href="/stocks">Back</a>
+                <Link to="/stocks">Back</Link>
             </main>
 
         )
