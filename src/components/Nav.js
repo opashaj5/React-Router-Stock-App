@@ -1,14 +1,9 @@
-import { Link } from "react-router-dom";
-
-export default function Nav(props) {
+export default function Nav() {
     return (
-        <div className="nav">
-            <Link to="/">
-                <div>Home</div>
-            </Link>
-            <Link to="/about">
-                <div>About</div>
-            </Link>
-        </div>
+        <nav>
+            <a class="nav-link" href="/">Home</a>
+            <a class="nav-link" href="/about">About</a>
+            <a class="nav-link" href="/stocks">Stocks</a>
+        </nav>
     )
-}
+};

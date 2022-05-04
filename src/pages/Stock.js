@@ -1,50 +1,58 @@
+import React from 'react';
+import { useParams } from 'react-router';
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom"
 
-export default function Price(props) {
-    // Our api key from coinapi.io
-    const apiKey = 'BF59FC6C-E65E-4861-9583-963CE25DB58B';
-    // Grabbing the Currency symbol from the URL Params
-    const params = useParams()
-    const symbol = params.symbol
-    // Using the other two variables to create our URL
-    const url = `http://rest-sandbox.coinapi.io/v1/exchangerate/${symbol}/USD?apikey=${apiKey}`;
+export default function Stock(props) {
+    const apiKey = "0d8549135377a48644c3e54129de948d"
+    const params = useParams();
+    const symbol = params.symbol;
+    const URL = `https://financialmodelingprep.com/api/v3/quote/${symbol}?apikey=${apiKey}`;
+    const [stock, setStock] = useState({});
 
-    //state to hold the coin data
-    const [coin, setCoin] = useState(null);
-
-    const getCoin = async () => {
+    const getStock = async () => {
         try {
-            const response = await fetch(url);
+            const response = await fetch(URL);
             const data = await response.json();
-            setCoin(data);
-        } catch (e) {
-            console.error(e)
+            setStock(data[0]);
+        } catch (err) {
+            console.error(err)
         }
     };
 
-    // useEffect to run getCoin when component mounts
     useEffect(() => {
-        getCoin();
+        getStock()
     }, []);
 
-    // loaded function for when data is fetched
     const loaded = () => {
         return (
-            <div>
-                <h1>
-                    {coin.asset_id_base}/{coin.asset_id_quote}
-                </h1>
-                <h2>{coin.rate}</h2>
-            </div>
-        );
+            <main>
+                <div className="container">
+                    <h5>Company Name:
+                        <li>{stock.name}</li></h5>
+                    <h5>Price:
+                        <li>{stock.price}</li></h5>
+                    <h5>Change:
+                        <li>{stock.change.toFixed(2)}</li></h5>
+                    <h5>Daily High:
+                        <li>{stock.dayHigh}</li></h5>
+                    <h5>Daily Low:
+                        <li>{stock.dayLow}</li></h5>
+                    <h5>Volume:
+                        <li>{stock.volume}</li></h5>
+                </div>
+                <a class="nav-link" href="/stocks">Back</a>
+            </main>
+
+        )
     };
 
-    // Function for when data doesn't exist
     const loading = () => {
-        return <h1>Loading...</h1>;
+        return (
+            <h1>Loading...</h1>
+        )
     };
 
-    // if coin has data, run the loaded function, otherwise, run loading
-    return coin && coin.rate ? loaded() : loading();
+    return (
+        stock && stock.price ? loaded() : loading()
+    );
 };

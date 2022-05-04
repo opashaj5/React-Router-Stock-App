@@ -1,12 +1,21 @@
-import { stocks as data } from '../stock-data.js';
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import stockData from "../stock-data";
 
-export default function Dashboard() {
-    const displayAllStocks = (obj, idx) => {
-        return (
-            <Link to={`/stock-data/${obj.symbol}`}>
-                <li key={idx}>{obj.name}</li>
-            </Link>
-        )
-    };
-}
+export default function Stocks(props) {
+
+    return (
+        <main>
+            <h1>Most Active Stocks</h1>
+            <ul>
+                {
+                    stockData.map((stock, idx) => {
+                        const { name, symbol } = stock;
+                        return (
+                            <Link to={`/stocks/${symbol}`}>{name}, {symbol}</Link>
+                        )
+                    })
+                }
+            </ul>
+        </main>
+    );
+};
